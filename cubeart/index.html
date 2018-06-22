@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cube Art</title>
+<style>
+
+body {
+    background-color: #222222;
+    color: #aaaaaa;
+}
+
+.left {
+    display: inline-block;
+    vertical-align:top;
+    width: 250px;
+}
+
+.right {
+    display: inline-block;
+    vertical-align:top;
+    width: 600px;
+}
+
+.colorselect {
+    display: block;
+}
+
+.heading {
+    margin-top: 20px;
+}
+
+.url {
+    font-family: monospace;
+    font-size: 8px;
+}
+
+.name {
+    font-weight: 900;
+    font-family: monospace;
+    font-size: 1.2em;
+}
+
+</style>
+</head>
+<body onload="window.cubeArtInit()">
+
+<div class="left">
+    <div class="heading">
+        File: <span class="name" id="n"></span>
+    </div>
+    <input id="u" class="url" type="file"></input>
+    <div class="heading">
+        Border:
+    </div>
+    <select class="colorselect" id="b">
+        <option value="r">Red</option>
+        <option value="g">Green</option>
+        <option value="b">Blue</option>
+        <option value="y">Yellow</option>
+        <option value="o">Orange</option>
+        <option value="w">White</option>
+    </select>
+    <div class="heading">
+        Palette:
+    </div>
+    <select class="colorselect" id="c0">
+        <option value="r">Red</option>
+        <option value="g">Green</option>
+        <option value="b">Blue</option>
+        <option value="y">Yellow</option>
+        <option value="o">Orange</option>
+        <option value="w">White</option>
+    </select>
+    <select class="colorselect" id="c1">
+        <option value="r">Red</option>
+        <option value="g">Green</option>
+        <option value="b">Blue</option>
+        <option value="y">Yellow</option>
+        <option value="o">Orange</option>
+        <option value="w">White</option>
+    </select>
+    <select class="colorselect" id="c2">
+        <option value="r">Red</option>
+        <option value="g">Green</option>
+        <option value="b">Blue</option>
+        <option value="y">Yellow</option>
+        <option value="o">Orange</option>
+        <option value="w">White</option>
+    </select>
+    <select class="colorselect" id="c3">
+        <option value="r">Red</option>
+        <option value="g">Green</option>
+        <option value="b">Blue</option>
+        <option value="y">Yellow</option>
+        <option value="o">Orange</option>
+        <option value="w">White</option>
+    </select>
+    <select class="colorselect" id="c4">
+        <option value="r">Red</option>
+        <option value="g">Green</option>
+        <option value="b">Blue</option>
+        <option value="y">Yellow</option>
+        <option value="o">Orange</option>
+        <option value="w">White</option>
+    </select>
+    <select class="colorselect" id="c5">
+        <option value="r">Red</option>
+        <option value="g">Green</option>
+        <option value="b">Blue</option>
+        <option value="y">Yellow</option>
+        <option value="o">Orange</option>
+        <option value="w">White</option>
+    </select>
+</div>
+
+<div class="right">
+    <canvas id="cubeart" width="601" height="601"></canvas>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
