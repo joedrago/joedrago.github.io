@@ -1,0 +1,38 @@
+{
+  "name": "loopscript",
+  "description": "Makefiles for sound!",
+  "keywords": [
+    "language",
+    "compiler",
+    "audio"
+  ],
+  "author": "Joe Drago",
+  "version": "0.0.9",
+  "license": "Boost",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "main": "cli/loopscript.js",
+  "bin": {
+    "loopscript": "./bin/loopscript"
+  },
+  "homepage": "http://loopscript.com/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joedrago/loopscript.git"
+  },
+  "scripts": {
+    "build": "cake build"
+  },
+  "devDependencies": {
+    "coffee-script": "*",
+    "browserify": "4.x",
+    "coffeeify": "*",
+    "mold-source-map": "*",
+    "node-watch": "*",
+    "node-static": "*"
+  },
+  "dependencies": {
+    "minimist": "*"
+  }
+}

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LoopScript: Play</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+      body {
+        padding-top: 70px;
+        padding-bottom: 30px;
+      }
+
+      .listenclick {
+        cursor: pointer;
+      }
+
+      .well {
+        margin-bottom: 2px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">LoopScript</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li >
+              <a href="/">Home</a>
+            </li>
+            <li >
+              <a href="learn.html">Learn</a>
+            </li>
+            <li class="active">
+              <a href="play.html">Play</a>
+            </li>
+            <li >
+              <a href="source.html">Get it</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container" role="main">
+<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lz-string-1.3.3-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/loopscript.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.urlshortener.min.js" type="text/javascript" charset="utf-8"></script>
+
+<style>
+  #editor {
+    width: 100%;
+    height: 350px;
+    border: 1px solid #aaaaaa;
+  }
+
+  #output {
+    width: 100%;
+    height: 100px;
+
+    font-family: monospace;
+    overflow: auto;
+    border: 1px solid #aaaaaa;
+
+    display: none;
+  }
+
+  #beatmaker {
+    display: none;
+  }
+
+  #beatinput {
+    width: 100%;
+
+    margin-bottom: 10px;
+    font-family: monospace;
+    overflow: auto;
+    border: 1px solid #aaaaaa;
+  }
+
+  #shorturl {
+    font-family: monospace;
+    font-size: 1.5em;
+  }
+
+  #beatoutput {
+    width: 100%;
+    height: 450px;
+
+    font-family: monospace;
+    white-space: pre;
+
+    overflow: auto;
+    border: 1px solid #aaaaaa;
+  }
+
+  .actions {
+    font-size: 1.5em;
+  }
+
+  .compile {
+    font-weight: 900;
+  }
+</style>
+
+<h1>Playground</h1>
+
+Edit the LoopScript below and hit "Compile" to turn it into audio.<br>
+If you make a mistake, you should be able to read it in the output below the editor once you've attempted to compile.<br>
+<br>
+<pre>
+H-L are the black keys:
+     H I   J K L
+    C D E F G A B
+</pre>
+<div id="editor"></div>
+<div class="actions">
+
+[<a href="#" class="compile" onclick="render(editor.getValue(), '#renderedlink', true, true)">Compile</a>]
+[<a href="#" onclick="shareUrl()">Permalink</a>]
+[<a href="#" onclick="shortUrl()">Short URL</a>]
+
+<span class="dropdown theme-dropdown">
+  [<a id="dropdownMenu1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Example<b class="caret"></b></a>]
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('first')">Your First LoopScript</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('notes')">Note Overrides</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('length')">Note Lengths</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('chocobo')">Chocobo Theme</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('kick')">Bass Kick</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('kickpattern')">Simple Kick Pattern</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('wiggle')">Wiggle</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('motto')">Drake - The Motto</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('beatmaker')">BeatMaker Test Bed</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="example('gambino3005')">Childish Gambino - 3005 (intro)</a></li>
+  </ul>
+</span>
+
+[<a href="#" onclick="beatMaker()">BeatMaker</a>]
+
+</div>
+
+<div id="output">
+Compile output:<br>
+<br>
+</div>
+<br>
+
+<span id="renderedlink"></span>
+
+<div id="shorturl"></div>
+
+<div id="beatmaker">
+
+<h1>BeatMaker</h1>
+
+BeatMaker is a convenience tool for coming up with pattern statements.<br>
+Simply click in the box below and use the alphabet keys as your piano. After you've repeated the pattern exactly twice, wait for BeatMaker to make a best guess on BPM and a series of possible patterns to use.<br>
+<br>
+Use the <a href="#" onclick="if(confirm('Replace the current LoopScript with the BeatMaker Test Bed?')) { example('beatmaker'); }">BeatMaker Test Bed sample script</a> to see a simple use case. (If you use this, use K and C for kick and clap, respectively.)<br>
+<br>
+<input type="text" id="beatinput" readonly>
+
+<div id="beatoutput">(BeatMaker output will go here.)<br>
+<br>
+</div>
+<br>
+
+</div>
+
+<script>
+    // from http://css-tricks.com/snippets/javascript/get-url-variables/
+    function getQueryVariable(variable)
+    {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+      }
+      // return(false);
+      return "";
+    }
+
+    // from http://stackoverflow.com/questions/1173194/select-all-div-text-with-single-mouse-click
+    function selectText(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select();
+        } else if (window.getSelection()) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+        }
+    }
+
+    jQuery.urlShortener.settings.apiKey='AIzaSyDrlWADAWOaDClnMAWh-316Jo8cDIS8qo4';
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/github");
+    editor.getSession().setMode("ace/mode/loopscript");
+    editor.setHighlightActiveLine(false);
+    editor.setPrintMarginColumn(0);
+
+    var loopscript = require("./loopscript");
+    var examples = require("./examples");
+    function render(scriptText, outputID, showOutput, showSaveAs)
+    {
+      if(showOutput)
+      {
+        $('#output').css("display", "block");
+      }
+      var lsOutput = loopscript.render({
+          script: scriptText,
+          imageWidth: 300,
+          imageHeight: 50,
+          imageWaveformColor: [0, 134, 179],
+          log: {
+            verbose: function(text) {
+              if(showOutput)
+              {
+                $('#output').append(text + "<br>");
+                var o = document.getElementById("output");
+                o.scrollTop = o.scrollHeight;
+              }
+            },
+            error: function(text) {
+              if(showOutput)
+              {
+                $('#output').append("<span class=\"error\">" + text + "</span><br>");
+                var o = document.getElementById("output");
+                o.scrollTop = o.scrollHeight;
+              }
+            }
+          }
+      });
+      var html = "<img src=\""+lsOutput.imageUrl+"\"><br>";
+      html += "<audio src="+lsOutput.wavUrl+" controls preload=\"auto\" autobuffer></audio>";
+      if(showSaveAs) {
+        html += "<a href="+lsOutput.wavUrl+"><br>Right click here to Save As...</a>";
+      }
+      $(outputID).html(html);
+    }
+
+    function replaceText(text)
+    {
+      if(text != null)
+      {
+        editor.setValue(text);
+        editor.clearSelection();
+      }
+    }
+
+    function example(name)
+    {
+      replaceText(examples[name]);
+    }
+
+    function permalink()
+    {
+      var encodedScript = LZString.compressToBase64(editor.getValue());
+      var loc = "" + window.location;
+      var urlPieces = loc.split("?");
+      urlPieces = urlPieces[0].split("#");
+      var url = urlPieces[0] + "?s=" + encodedScript;
+      return url;
+    }
+
+    function shareUrl()
+    {
+      var url = permalink();
+      // window.prompt("Copy to clipboard:", url);
+      window.location = url;
+    }
+
+    function shortUrl()
+    {
+      $('#shorturl').html("Generating short url ...");
+
+      jQuery.urlShortener({
+          longUrl: permalink(),
+          success: function (shortUrl) {
+            $('#shorturl').html(shortUrl);
+            selectText('shorturl');
+          },
+          error: function(err)
+          {
+            $('#shorturl').html("Failed to create short URL.");
+          }
+      });
+    }
+
+    function beatMaker()
+    {
+      $('#beatmaker').toggle();
+    }
+
+    $(function() {
+      editor.resize();
+      var encodedScript = getQueryVariable("s");
+      var decodedScript = null;
+      if(encodedScript.length > 0)
+      {
+        decodedScript = LZString.decompressFromBase64(encodedScript);
+      }
+      if(typeof decodedScript == "string")
+      {
+        replaceText(decodedScript);
+      }
+      else
+      {
+        example('first');
+      }
+
+      var beatmaker = require("./beatmaker");
+
+    });
+
+</script>
+
+    </div>
+
+  </body>
+</html>

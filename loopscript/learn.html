@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LoopScript: Learn</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+      body {
+        padding-top: 70px;
+        padding-bottom: 30px;
+      }
+
+      .listenclick {
+        cursor: pointer;
+      }
+
+      .well {
+        margin-bottom: 2px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">LoopScript</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li >
+              <a href="/">Home</a>
+            </li>
+            <li class="active">
+              <a href="learn.html">Learn</a>
+            </li>
+            <li >
+              <a href="play.html">Play</a>
+            </li>
+            <li >
+              <a href="source.html">Get it</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container" role="main">
+<script src="js/loopscript.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lz-string-1.3.3-min.js" type="text/javascript" charset="utf-8"></script>
+
+<style>
+
+  h3 {
+    margin-top: 30px;
+  }
+
+  p {
+    white-space: pre-line;
+  }
+
+  .exOuter {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .exTitle {
+    font-size: 0.8em;
+    font-weight: 900;
+  }
+
+  .exCode {
+    font-family: monospace;
+    white-space: pre;
+    border: 1px solid #eeeeee;
+  }
+
+  .comment {
+    color: #ff0000;
+  }
+  .keyword {
+    color: #0086B3;
+    font-weight: 900;
+  }
+  .command {
+    color: #0086B3;
+  }
+  .operator {
+    color: #ff0000;
+  }
+  .pattern {
+    color: #ff0000;
+  }
+
+  .exPlayer {
+    font-size: 0.8em;
+  }
+
+  .exPlayerActions {
+    font-size: 0.8em;
+  }
+</style>
+
+<h1>Learning LoopScript</h1>
+
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#format">Format</a></li>
+<li><a href="#tones">Tones</a></li>
+<li><a href="#samples">Samples</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#tracks">Tracks</a></li>
+<li><a href="#sections">Sections</a></li>
+<li><a href="#advanced">Advanced</a></li>
+</ul>
+
+<a name="intro">&nbsp;</a>
+<h3>Introduction</h3>
+
+<p>LoopScript is a text format which allows you to describe sounds, and then usem in interesting loop patterns to make beats or melodies. You can then combine those loops into longer tracks to create songs. Any sound or pattern you create can be individually played or exported as a sound file.
+
+Sounds are created using a simple declarative format. A 1.5 second C note might look like this in LoopScript:</p>
+
+<div id="exOuter1" class="exOuter">
+<div id="exTitle1" class="exTitle">
+1.5 second C note:
+</div>
+<div id="exCode1" class="exCode well"><span class="keyword">tone</span> introsound 
+  <span class="command">duration</span> 1500 
+  <span class="command">note</span> C 
+</div>
+<div id="exPlayerActions1" class="exPlayerActions">
+[<a class="listenclick" onclick="useExampleCode1(true); return false">Listen Here</a>]
+[<a href="#" onclick="useExampleCode1(false)">Listen in Playground</a>]
+</div>
+<div id="exPlayer1" class="exPlayer">
+</div>
+<script>
+function useExampleCode1(doRender) {
+  var exampleCode1 = "tone introsound\n  duration 1500\n  note C";
+  if(doRender) {
+    render(exampleCode1, '#exPlayer1', false, false);
+  } else {
+    var encodedScript = LZString.compressToBase64(exampleCode1);
+    window.location = "play.html?s=" + encodedScript;
+  }
+}
+</script>
+</div>
+
+<p>This defines a new sound named "introsound". This sound can be referenced by name in other places in the LoopScript to be used as a source for loop patterns or other sound manipulation. When playing around on the website (such as <a href="play.html">the Playground</a>) or if not specified on the commandline, LoopScript will always just generate the last thing declared. The commandline version lets you specify a sound by name to generate if you just want to test the output of a sound without having to listen to the entire thing every time.
+
+The rest of this page can be read/skimmed in order to see all of the features of LoopScript, or used as a reference via the table of contents above.</p>
+
+<a name="format">&nbsp;</a>
+<h3>Format</h3>
+
+<p>LoopScript is pretty light on punctuation, and relies on line breaks an indents for most of its formatting. As in other formats/languages where indentation is significant, you can choose how much you want to indent each section provided that you are consistent (always use 2 space indents or a single tab indent, etc).
+
+Most sounds are a type (such as "tone") followed by your name for it, followed by some indented lines which define its settings. Names cannot contain spaces, but are otherwise pretty loose. Keeping the names simple and terse is best as you'll be referencing them later in your LoopScripts.
+
+Any setting you choose can be used outside of a sound declaration to change the default. For example, the <span class="command">bpm</span> setting ("beats per minute") is only meaningful to a <span class="keyword">loop</span> definition, but you can set it at top of your LoopScript to set the default bpm for any upcoming loops. You can also change it later in a global place and it'll only affect loops that haven't been declared yet. This works for any setting.
+
+Comments are made with the hash mark ("<span class="comment">#</span>"), and continue to the end of the line.
+
+An arrow pointing to the right ("<span class="operator">-&gt;</span>") can be used an alternative to an indent, and a semicolon and break up multiple settings on the same line. (experimental)</p>
+
+<div id="exOuter2" class="exOuter">
+<div id="exTitle2" class="exTitle">
+Basic LoopScript format:
+</div>
+<div id="exCode2" class="exCode well"><span class="keyword">tone</span> note1                           <span class="comment"># Defines a new tone named "note1"</span>
+  <span class="command">duration</span> 250                       <span class="comment"># Length of tone, in milliseconds</span>
+  <span class="command">octave</span> 4                           <span class="comment"># Sets the octave for the note (0-8)</span>
+  <span class="command">note</span> C                             <span class="comment"># A-G are regular notes, H-L are the "black keys"</span>
+ 
+<span class="keyword">tone</span> bass1                           <span class="comment"># This begins a new tone (note the reset indentation)</span>
+  <span class="command">duration</span> 250                       <span class="comment"># New indent begins here</span>
+  <span class="command">octave</span> 1 
+  <span class="command">note</span> B 
+ 
+<span class="keyword">loop</span> loop1                           <span class="comment"># Loop declaration</span>
+  <span class="command">pattern</span> note1 <span class="pattern">x.......x.......</span>     <span class="comment"># Uses note1</span>
+  <span class="command">pattern</span> bass1 <span class="pattern">....x.......x...</span>     <span class="comment"># Uses bass1</span>
+</div>
+<div id="exPlayerActions2" class="exPlayerActions">
+[<a class="listenclick" onclick="useExampleCode2(true); return false">Listen Here</a>]
+[<a href="#" onclick="useExampleCode2(false)">Listen in Playground</a>]
+</div>
+<div id="exPlayer2" class="exPlayer">
+</div>
+<script>
+function useExampleCode2(doRender) {
+  var exampleCode2 = "tone note1                          # Defines a new tone named \"note1\"\n  duration 250                      # Length of tone, in milliseconds\n  octave 4                          # Sets the octave for the note (0-8)\n  note C                            # A-G are regular notes, H-L are the \"black keys\"\n\ntone bass1                          # This begins a new tone (note the reset indentation)\n  duration 250                      # New indent begins here\n  octave 1\n  note B\n\nloop loop1                          # Loop declaration\n  pattern note1 x.......x.......    # Uses note1\n  pattern bass1 ....x.......x...    # Uses bass1";
+  if(doRender) {
+    render(exampleCode2, '#exPlayer2', false, false);
+  } else {
+    var encodedScript = LZString.compressToBase64(exampleCode2);
+    window.location = "play.html?s=" + encodedScript;
+  }
+}
+</script>
+</div>
+
+<a name="tones">&nbsp;</a>
+<h3>Tones</h3>
+
+<p>A <span class="keyword">tone</span> is a description of a single waveform:</p>
+
+<div id="exOuter3" class="exOuter">
+<div id="exTitle3" class="exTitle">
+A tone that uses all defaults:
+</div>
+<div id="exCode3" class="exCode well"><span class="keyword">tone</span> example1 
+</div>
+<div id="exPlayerActions3" class="exPlayerActions">
+[<a class="listenclick" onclick="useExampleCode3(true); return false">Listen Here</a>]
+[<a href="#" onclick="useExampleCode3(false)">Listen in Playground</a>]
+</div>
+<div id="exPlayer3" class="exPlayer">
+</div>
+<script>
+function useExampleCode3(doRender) {
+  var exampleCode3 = "tone example1";
+  if(doRender) {
+    render(exampleCode3, '#exPlayer3', false, false);
+  } else {
+    var encodedScript = LZString.compressToBase64(exampleCode3);
+    window.location = "play.html?s=" + encodedScript;
+  }
+}
+</script>
+</div>
+
+<p>Tones have the following settings:</p>
+
+<ul>
+<li><span class="command">wave</span> - What type of waveform. <b>sine</b> is the default, and currently the only choice.</li>
+<li><span class="command">duration</span> - The length of the sound in milliseconds.</li>
+<li><span class="command">note</span> - Sets the frequency to a note (used with octave). <b>A-</b> are their respective notes, and H-L are the "black keys" of a piano (sharps/flats). </li>
+<li><span class="command">octave</span> - A value between 0 and 8 indicating the octave on a piano (0 is the bass end).</li>
+<li><span class="command">freq</span> - Directly set the frequency of the waveform. This overrides the note/octave pair.</li>
+<li><span class="command">volume</span> - A relative volume change. <b>1.0</b> is the default, which does not alter the volume.</li>
+<li><span class="command">clip</span> - <b>true/false</b> When used in a loop, this determines whether the sound will "clip" (overwrite) itself if played again before the previous duration finishes. If it is false, it will mix them together. Defaults to <b>true</b>.</li>
+<li><span class="command">reverb</span> - Sets the reverb (echo) on a waveform. Takes two values: a delay (integer) and a decay (floating point value). The delay is how long in milliseconds to repeat the sound, and decay is how much the volume decays for each echoed sound. (ex. reverb 250 0.5)</li>
+<li><span class="command">adsr</span> - Uses an ADSR envelope on the waveform. Takes 4 floats represent, ex. "adsr 0.005 0.05 0.7 0.05". See the <a href="#adsr">ADSR</a> section to understand what these values mean.</li>
+</ul>
+
+<p>Here is an example of a more complicated tone:</p>
+
+<div id="exOuter4" class="exOuter">
+<div id="exTitle4" class="exTitle">
+So complicated!:
+</div>
+<div id="exCode4" class="exCode well"><span class="keyword">tone</span> echosound 
+  <span class="command">wave</span> sine 
+  <span class="command">duration</span> 800 
+  <span class="command">octave</span> 4 
+  <span class="command">note</span> G 
+  <span class="command">adsr</span> 0.005 0.05 0.7 0.05 
+  <span class="command">reverb</span> 250 0.5 
+</div>
+<div id="exPlayerActions4" class="exPlayerActions">
+[<a class="listenclick" onclick="useExampleCode4(true); return false">Listen Here</a>]
+[<a href="#" onclick="useExampleCode4(false)">Listen in Playground</a>]
+</div>
+<div id="exPlayer4" class="exPlayer">
+</div>
+<script>
+function useExampleCode4(doRender) {
+  var exampleCode4 = "tone echosound\n  wave sine\n  duration 800\n  octave 4\n  note G\n  adsr 0.005 0.05 0.7 0.05\n  reverb 250 0.5";
+  if(doRender) {
+    render(exampleCode4, '#exPlayer4', false, false);
+  } else {
+    var encodedScript = LZString.compressToBase64(exampleCode4);
+    window.location = "play.html?s=" + encodedScript;
+  }
+}
+</script>
+</div>
+
+<a name="samples">&nbsp;</a>
+<h3>Samples</h3>
+
+<p>Samples are external sound effects, read in from WAV files. Currently, LoopScript only supports 16 bit, 44.1KHz, mono WAV files.</p>
+
+<div id="exOuter5" class="exOuter">
+<div id="exTitle5" class="exTitle">
+Basic sample:
+</div>
+<div id="exCode5" class="exCode well"><span class="keyword">sample</span> clap 
+  <span class="command">src</span> samples/clap.wav 
+</div>
+<div id="exPlayerActions5" class="exPlayerActions">
+[<a class="listenclick" onclick="useExampleCode5(true); return false">Listen Here</a>]
+[<a href="#" onclick="useExampleCode5(false)">Listen in Playground</a>]
+</div>
+<div id="exPlayer5" class="exPlayer">
+</div>
+<script>
+function useExampleCode5(doRender) {
+  var exampleCode5 = "sample clap\n  src samples/clap.wav";
+  if(doRender) {
+    render(exampleCode5, '#exPlayer5', false, false);
+  } else {
+    var encodedScript = LZString.compressToBase64(exampleCode5);
+    window.location = "play.html?s=" + encodedScript;
+  }
+}
+</script>
+</div>
+
+<p>Samples support the following settings:</p>
+
+<ul>
+<li><span class="command">src</span> - Location of the WAV file. Required. (no default value)</li>
+<li><span class="command">volume</span> - A relative volume change. <b>1.0</b> is the default, which does not alter the volume.</li>
+<li><span class="command">clip</span> - <b>true/false</b> When used in a loop, this determines whether the sound will "clip" (overwrite) itself if played again before the previous duration finishes. If it is false, it will mix them together. Defaults to <b>true</b>.</li>
+<li><span class="command">reverb</span> - Sets the reverb (echo) on a waveform. Takes two values: a delay (integer) and a decay (floating point value). The delay is how long in milliseconds to repeat the sound, and decay is how much the volume decays for each echoed sound. (ex. reverb 250 0.5)</li>
+
+<li><span class="command">srcnote</span> - The perceived note of the sample (A-L). This is useful for changing the pitch of a sample for a melody, such as a sample of a single guitar note.</li>
+<li><span class="command">srcoctave</span> - The perceived octave of the sample. (0-8)</li>
+<li><span class="command">note</span> - The requested note. If different than srcnote, the sample's pitch will be adjusted.</li>
+<li><span class="command">octave</span> - The requested octave. If different than srcoctave, the sample's pitch will be adjusted.</li>
+</ul>
+
+<div id="exOuter6" class="exOuter">
+<div id="exTitle6" class="exTitle">
+Pitch correction (compare to the sample above to hear the difference in pitch):
+</div>
+<div id="exCode6" class="exCode well"><span class="keyword">sample</span> clapCtoA 
+  <span class="command">src</span> samples/clap.wav 
+  <span class="command">srcnote</span> c 
+  <span class="command">note</span> a 
+</div>
+<div id="exPlayerActions6" class="exPlayerActions">
+[<a class="listenclick" onclick="useExampleCode6(true); return false">Listen Here</a>]
+[<a href="#" onclick="useExampleCode6(false)">Listen in Playground</a>]
+</div>
+<div id="exPlayer6" class="exPlayer">
+</div>
+<script>
+function useExampleCode6(doRender) {
+  var exampleCode6 = "sample clapCtoA\n  src samples/clap.wav\n  srcnote c\n  note a";
+  if(doRender) {
+    render(exampleCode6, '#exPlayer6', false, false);
+  } else {
+    var encodedScript = LZString.compressToBase64(exampleCode6);
+    window.location = "play.html?s=" + encodedScript;
+  }
+}
+</script>
+</div>
+
+<a name="loops">&nbsp;</a>
+<h3>Loops</h3>
+
+<p>Loops are mixes of sounds in timed patterns. A loop requires at least one pattern which has the sound it will be repeating and a string of letters which represent the pattern itself. An example:</p>
+
+<div id="exOuter7" class="exOuter">
+<div id="exTitle7" class="exTitle">
+120 BPM
+</div>
+<div id="exCode7" class="exCode well"> 
+<span class="keyword">sample</span> clap 
+  <span class="command">src</span> samples/clap.wav 
+ 
+<span class="keyword">loop</span> loop1 
+  <span class="command">pattern</span> clap <span class="pattern">x...x...x...x...</span> 
+</div>
+<div id="exPlayerActions7" class="exPlayerActions">
+[<a class="listenclick" onclick="useExampleCode7(true); return false">Listen Here</a>]
+[<a href="#" onclick="useExampleCode7(false)">Listen in Playground</a>]
+</div>
+<div id="exPlayer7" class="exPlayer">
+</div>
+<script>
+function useExampleCode7(doRender) {
+  var exampleCode7 = "\nsample clap\n  src samples/clap.wav\n\nloop loop1\n  pattern clap x...x...x...x...";
+  if(doRender) {
+    render(exampleCode7, '#exPlayer7', false, false);
+  } else {
+    var encodedScript = LZString.compressToBase64(exampleCode7);
+    window.location = "play.html?s=" + encodedScript;
+  }
+}
+</script>
+</div>
+
+<p>Pattern strings must always be a multiple of 16 characters, but has no limit to its length (within reason).
+
+Loops support the following settings:</p>
+
+<ul>
+<li><span class="command">bpm</span> - Beats Per Minute, aka tempo. <b>120</b> default.</li>
+<li><span class="command">pattern</span> - Explained above. Takes another sound's name and a pattern string.</li>
+</ul>
+
+<a name="tracks">&nbsp;</a>
+<h3>Tracks</h3>
+
+<p>--Soon--</p>
+
+<a name="sections">&nbsp;</a>
+<h3>Sections</h3>
+
+<p>--Soon--</p>
+
+<a name="advanced">&nbsp;</a>
+<h3>Advanced</h3>
+
+<p>--Soon--</p>
+
+<a name="adsr">&nbsp;</a>
+<h4>ADSR</h4>
+
+<p>--Soon--</p>
+
+<img src="images/adsr.png" height="250">
+
+<script>
+    var loopscript = require("./loopscript");
+    function render(scriptText, outputID, showOutput, showSaveAs)
+    {
+      if(showOutput)
+      {
+        $('#output').css("display", "block");
+      }
+      var lsOutput = loopscript.render({
+          script: scriptText,
+          imageWidth: 300,
+          imageHeight: 50,
+          imageWaveformColor: [0, 134, 179],
+          log: {
+            verbose: function(text) {
+              if(showOutput)
+              {
+                $('#output').append(text + "<br>");
+                var o = document.getElementById("output");
+                o.scrollTop = o.scrollHeight;
+              }
+            },
+            error: function(text) {
+              if(showOutput)
+              {
+                $('#output').append("<span class=\"error\">" + text + "</span><br>");
+                var o = document.getElementById("output");
+                o.scrollTop = o.scrollHeight;
+              }
+            }
+          }
+      });
+      var html = "<img src=\""+lsOutput.imageUrl+"\"><br>";
+      html += "<audio src="+lsOutput.wavUrl+" controls preload=\"auto\" autobuffer></audio>";
+      if(showSaveAs) {
+        html += "<a href="+lsOutput.wavUrl+"><br>Right click here to Save As...</a>";
+      }
+      $(outputID).html(html);
+    }
+</script>
+
+<!--
+<div class="alert alert-info">
+<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+</div>
+-->
+
+    </div>
+
+  </body>
+</html>

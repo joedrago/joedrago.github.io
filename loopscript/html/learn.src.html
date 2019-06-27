@@ -1,0 +1,271 @@
+<script src="js/loopscript.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lz-string-1.3.3-min.js" type="text/javascript" charset="utf-8"></script>
+
+<style>
+
+  h3 {
+    margin-top: 30px;
+  }
+
+  p {
+    white-space: pre-line;
+  }
+
+  .exOuter {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .exTitle {
+    font-size: 0.8em;
+    font-weight: 900;
+  }
+
+  .exCode {
+    font-family: monospace;
+    white-space: pre;
+    border: 1px solid #eeeeee;
+  }
+
+  .comment {
+    color: #ff0000;
+  }
+  .keyword {
+    color: #0086B3;
+    font-weight: 900;
+  }
+  .command {
+    color: #0086B3;
+  }
+  .operator {
+    color: #ff0000;
+  }
+  .pattern {
+    color: #ff0000;
+  }
+
+  .exPlayer {
+    font-size: 0.8em;
+  }
+
+  .exPlayerActions {
+    font-size: 0.8em;
+  }
+</style>
+
+<h1>Learning LoopScript</h1>
+
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#format">Format</a></li>
+<li><a href="#tones">Tones</a></li>
+<li><a href="#samples">Samples</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#tracks">Tracks</a></li>
+<li><a href="#sections">Sections</a></li>
+<li><a href="#advanced">Advanced</a></li>
+</ul>
+
+<a name="intro">&nbsp;</a>
+<h3>Introduction</h3>
+
+<p>LoopScript is a text format which allows you to describe sounds, and then usem in interesting loop patterns to make beats or melodies. You can then combine those loops into longer tracks to create songs. Any sound or pattern you create can be individually played or exported as a sound file.
+
+Sounds are created using a simple declarative format. A 1.5 second C note might look like this in LoopScript:</p>
+
+EXAMPLE 1.5 second C note:
+tone introsound
+  duration 1500
+  note C
+END
+
+<p>This defines a new sound named "introsound". This sound can be referenced by name in other places in the LoopScript to be used as a source for loop patterns or other sound manipulation. When playing around on the website (such as <a href="play.html">the Playground</a>) or if not specified on the commandline, LoopScript will always just generate the last thing declared. The commandline version lets you specify a sound by name to generate if you just want to test the output of a sound without having to listen to the entire thing every time.
+
+The rest of this page can be read/skimmed in order to see all of the features of LoopScript, or used as a reference via the table of contents above.</p>
+
+<a name="format">&nbsp;</a>
+<h3>Format</h3>
+
+<p>LoopScript is pretty light on punctuation, and relies on line breaks an indents for most of its formatting. As in other formats/languages where indentation is significant, you can choose how much you want to indent each section provided that you are consistent (always use 2 space indents or a single tab indent, etc).
+
+Most sounds are a type (such as "tone") followed by your name for it, followed by some indented lines which define its settings. Names cannot contain spaces, but are otherwise pretty loose. Keeping the names simple and terse is best as you'll be referencing them later in your LoopScripts.
+
+Any setting you choose can be used outside of a sound declaration to change the default. For example, the <span class="command">bpm</span> setting ("beats per minute") is only meaningful to a <span class="keyword">loop</span> definition, but you can set it at top of your LoopScript to set the default bpm for any upcoming loops. You can also change it later in a global place and it'll only affect loops that haven't been declared yet. This works for any setting.
+
+Comments are made with the hash mark ("<span class="comment">#</span>"), and continue to the end of the line.
+
+An arrow pointing to the right ("<span class="operator">-&gt;</span>") can be used an alternative to an indent, and a semicolon and break up multiple settings on the same line. (experimental)</p>
+
+EXAMPLE Basic LoopScript format:
+tone note1                          # Defines a new tone named "note1"
+  duration 250                      # Length of tone, in milliseconds
+  octave 4                          # Sets the octave for the note (0-8)
+  note C                            # A-G are regular notes, H-L are the "black keys"
+
+tone bass1                          # This begins a new tone (note the reset indentation)
+  duration 250                      # New indent begins here
+  octave 1
+  note B
+
+loop loop1                          # Loop declaration
+  pattern note1 x.......x.......    # Uses note1
+  pattern bass1 ....x.......x...    # Uses bass1
+END
+
+<a name="tones">&nbsp;</a>
+<h3>Tones</h3>
+
+<p>A <span class="keyword">tone</span> is a description of a single waveform:</p>
+
+EXAMPLE A tone that uses all defaults:
+tone example1
+END
+
+<p>Tones have the following settings:</p>
+
+<ul>
+<li><span class="command">wave</span> - What type of waveform. <b>sine</b> is the default, and currently the only choice.</li>
+<li><span class="command">duration</span> - The length of the sound in milliseconds.</li>
+<li><span class="command">note</span> - Sets the frequency to a note (used with octave). <b>A-</b> are their respective notes, and H-L are the "black keys" of a piano (sharps/flats). </li>
+<li><span class="command">octave</span> - A value between 0 and 8 indicating the octave on a piano (0 is the bass end).</li>
+<li><span class="command">freq</span> - Directly set the frequency of the waveform. This overrides the note/octave pair.</li>
+<li><span class="command">volume</span> - A relative volume change. <b>1.0</b> is the default, which does not alter the volume.</li>
+<li><span class="command">clip</span> - <b>true/false</b> When used in a loop, this determines whether the sound will "clip" (overwrite) itself if played again before the previous duration finishes. If it is false, it will mix them together. Defaults to <b>true</b>.</li>
+<li><span class="command">reverb</span> - Sets the reverb (echo) on a waveform. Takes two values: a delay (integer) and a decay (floating point value). The delay is how long in milliseconds to repeat the sound, and decay is how much the volume decays for each echoed sound. (ex. reverb 250 0.5)</li>
+<li><span class="command">adsr</span> - Uses an ADSR envelope on the waveform. Takes 4 floats represent, ex. "adsr 0.005 0.05 0.7 0.05". See the <a href="#adsr">ADSR</a> section to understand what these values mean.</li>
+</ul>
+
+<p>Here is an example of a more complicated tone:</p>
+
+EXAMPLE So complicated!:
+tone echosound
+  wave sine
+  duration 800
+  octave 4
+  note G
+  adsr 0.005 0.05 0.7 0.05
+  reverb 250 0.5
+END
+
+<a name="samples">&nbsp;</a>
+<h3>Samples</h3>
+
+<p>Samples are external sound effects, read in from WAV files. Currently, LoopScript only supports 16 bit, 44.1KHz, mono WAV files.</p>
+
+EXAMPLE Basic sample:
+sample clap
+  src samples/clap.wav
+END
+
+<p>Samples support the following settings:</p>
+
+<ul>
+<li><span class="command">src</span> - Location of the WAV file. Required. (no default value)</li>
+<li><span class="command">volume</span> - A relative volume change. <b>1.0</b> is the default, which does not alter the volume.</li>
+<li><span class="command">clip</span> - <b>true/false</b> When used in a loop, this determines whether the sound will "clip" (overwrite) itself if played again before the previous duration finishes. If it is false, it will mix them together. Defaults to <b>true</b>.</li>
+<li><span class="command">reverb</span> - Sets the reverb (echo) on a waveform. Takes two values: a delay (integer) and a decay (floating point value). The delay is how long in milliseconds to repeat the sound, and decay is how much the volume decays for each echoed sound. (ex. reverb 250 0.5)</li>
+
+<li><span class="command">srcnote</span> - The perceived note of the sample (A-L). This is useful for changing the pitch of a sample for a melody, such as a sample of a single guitar note.</li>
+<li><span class="command">srcoctave</span> - The perceived octave of the sample. (0-8)</li>
+<li><span class="command">note</span> - The requested note. If different than srcnote, the sample's pitch will be adjusted.</li>
+<li><span class="command">octave</span> - The requested octave. If different than srcoctave, the sample's pitch will be adjusted.</li>
+</ul>
+
+EXAMPLE Pitch correction (compare to the sample above to hear the difference in pitch):
+sample clapCtoA
+  src samples/clap.wav
+  srcnote c
+  note a
+END
+
+<a name="loops">&nbsp;</a>
+<h3>Loops</h3>
+
+<p>Loops are mixes of sounds in timed patterns. A loop requires at least one pattern which has the sound it will be repeating and a string of letters which represent the pattern itself. An example:</p>
+
+EXAMPLE 120 BPM
+
+sample clap
+  src samples/clap.wav
+
+loop loop1
+  pattern clap x...x...x...x...
+END
+
+<p>Pattern strings must always be a multiple of 16 characters, but has no limit to its length (within reason).
+
+Loops support the following settings:</p>
+
+<ul>
+<li><span class="command">bpm</span> - Beats Per Minute, aka tempo. <b>120</b> default.</li>
+<li><span class="command">pattern</span> - Explained above. Takes another sound's name and a pattern string.</li>
+</ul>
+
+<a name="tracks">&nbsp;</a>
+<h3>Tracks</h3>
+
+<p>--Soon--</p>
+
+<a name="sections">&nbsp;</a>
+<h3>Sections</h3>
+
+<p>--Soon--</p>
+
+<a name="advanced">&nbsp;</a>
+<h3>Advanced</h3>
+
+<p>--Soon--</p>
+
+<a name="adsr">&nbsp;</a>
+<h4>ADSR</h4>
+
+<p>--Soon--</p>
+
+<img src="images/adsr.png" height="250">
+
+<script>
+    var loopscript = require("./loopscript");
+    function render(scriptText, outputID, showOutput, showSaveAs)
+    {
+      if(showOutput)
+      {
+        $('#output').css("display", "block");
+      }
+      var lsOutput = loopscript.render({
+          script: scriptText,
+          imageWidth: 300,
+          imageHeight: 50,
+          imageWaveformColor: [0, 134, 179],
+          log: {
+            verbose: function(text) {
+              if(showOutput)
+              {
+                $('#output').append(text + "<br>");
+                var o = document.getElementById("output");
+                o.scrollTop = o.scrollHeight;
+              }
+            },
+            error: function(text) {
+              if(showOutput)
+              {
+                $('#output').append("<span class=\"error\">" + text + "</span><br>");
+                var o = document.getElementById("output");
+                o.scrollTop = o.scrollHeight;
+              }
+            }
+          }
+      });
+      var html = "<img src=\""+lsOutput.imageUrl+"\"><br>";
+      html += "<audio src="+lsOutput.wavUrl+" controls preload=\"auto\" autobuffer></audio>";
+      if(showSaveAs) {
+        html += "<a href="+lsOutput.wavUrl+"><br>Right click here to Save As...</a>";
+      }
+      $(outputID).html(html);
+    }
+</script>
+
+<!--
+<div class="alert alert-info">
+<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+</div>
+-->
