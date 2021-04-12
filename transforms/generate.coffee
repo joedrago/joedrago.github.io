@@ -69,15 +69,12 @@ addTransform = (opts) ->
   addImage(filename, cmdline)
 
 addImage("img.png")
-addTransform {}
-for irot in [null, 0, 1, 2, 3]
-  addTransform {
-    irot: irot
-  }
-for imir in [null, 0, 1]
-  addTransform {
-    imir: imir
-  }
+for irot in [0, 1, 2, 3, null]
+  for imir in [0, 1, null]
+    addTransform {
+      irot: irot
+      imir: imir
+    }
 
 commands += "</div>"
 info += "</div>"

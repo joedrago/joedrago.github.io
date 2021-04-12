@@ -31,46 +31,70 @@
 <div class="title">img.png</div>
 <img class="image" src="img.png">
 </div><div class="imagecontainer">
-<div class="title">img_irotN_imirN.avif</div>
-<img class="image" src="img_irotN_imirN.avif">
+<div class="title">img_irot0_imir0.avif</div>
+<img class="image" src="img_irot0_imir0.avif">
 </div><div class="imagecontainer">
-<div class="title">img_irotN_imirN.avif</div>
-<img class="image" src="img_irotN_imirN.avif">
+<div class="title">img_irot0_imir1.avif</div>
+<img class="image" src="img_irot0_imir1.avif">
 </div><div class="imagecontainer">
 <div class="title">img_irot0_imirN.avif</div>
 <img class="image" src="img_irot0_imirN.avif">
 </div><div class="imagecontainer">
+<div class="title">img_irot1_imir0.avif</div>
+<img class="image" src="img_irot1_imir0.avif">
+</div><div class="imagecontainer">
+<div class="title">img_irot1_imir1.avif</div>
+<img class="image" src="img_irot1_imir1.avif">
+</div><div class="imagecontainer">
 <div class="title">img_irot1_imirN.avif</div>
 <img class="image" src="img_irot1_imirN.avif">
+</div><div class="imagecontainer">
+<div class="title">img_irot2_imir0.avif</div>
+<img class="image" src="img_irot2_imir0.avif">
+</div><div class="imagecontainer">
+<div class="title">img_irot2_imir1.avif</div>
+<img class="image" src="img_irot2_imir1.avif">
 </div><div class="imagecontainer">
 <div class="title">img_irot2_imirN.avif</div>
 <img class="image" src="img_irot2_imirN.avif">
 </div><div class="imagecontainer">
+<div class="title">img_irot3_imir0.avif</div>
+<img class="image" src="img_irot3_imir0.avif">
+</div><div class="imagecontainer">
+<div class="title">img_irot3_imir1.avif</div>
+<img class="image" src="img_irot3_imir1.avif">
+</div><div class="imagecontainer">
 <div class="title">img_irot3_imirN.avif</div>
 <img class="image" src="img_irot3_imirN.avif">
-</div><div class="imagecontainer">
-<div class="title">img_irotN_imirN.avif</div>
-<img class="image" src="img_irotN_imirN.avif">
 </div><div class="imagecontainer">
 <div class="title">img_irotN_imir0.avif</div>
 <img class="image" src="img_irotN_imir0.avif">
 </div><div class="imagecontainer">
 <div class="title">img_irotN_imir1.avif</div>
 <img class="image" src="img_irotN_imir1.avif">
+</div><div class="imagecontainer">
+<div class="title">img_irotN_imirN.avif</div>
+<img class="image" src="img_irotN_imirN.avif">
 </div>
 <div class="header">Commands:</div>
-<div class="commands">avifenc img.png img_irotN_imirN.avif
-avifenc img.png img_irotN_imirN.avif
+<div class="commands">avifenc img.png --irot 0 --imir 0 img_irot0_imir0.avif
+avifenc img.png --irot 0 --imir 1 img_irot0_imir1.avif
 avifenc img.png --irot 0 img_irot0_imirN.avif
+avifenc img.png --irot 1 --imir 0 img_irot1_imir0.avif
+avifenc img.png --irot 1 --imir 1 img_irot1_imir1.avif
 avifenc img.png --irot 1 img_irot1_imirN.avif
+avifenc img.png --irot 2 --imir 0 img_irot2_imir0.avif
+avifenc img.png --irot 2 --imir 1 img_irot2_imir1.avif
 avifenc img.png --irot 2 img_irot2_imirN.avif
+avifenc img.png --irot 3 --imir 0 img_irot3_imir0.avif
+avifenc img.png --irot 3 --imir 1 img_irot3_imir1.avif
 avifenc img.png --irot 3 img_irot3_imirN.avif
-avifenc img.png img_irotN_imirN.avif
 avifenc img.png --imir 0 img_irotN_imir0.avif
 avifenc img.png --imir 1 img_irotN_imir1.avif
+avifenc img.png img_irotN_imirN.avif
 </div>
 <div class="header">Output From avifdec --info:</div>
-<div class="commands">Image decoded: img_irotN_imirN.avif
+<div class="commands">Image decoded: img_irot0_imir0.avif
  * Resolution     : 245x334
  * Bit Depth      : 8
  * Format         : YUV444
@@ -82,12 +106,14 @@ avifenc img.png --imir 1 img_irotN_imir1.avif
  * ICC Profile    : Absent (0 bytes)
  * XMP Metadata   : Absent (0 bytes)
  * EXIF Metadata  : Absent (0 bytes)
- * Transformations: None
+ * Transformations:
+    * irot (Rotation)      : 0
+    * imir (Mirror)        : 0 (Vertical axis, "left-to-right")
  * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
  * Frames:
    * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
 
-Image decoded: img_irotN_imirN.avif
+Image decoded: img_irot0_imir1.avif
  * Resolution     : 245x334
  * Bit Depth      : 8
  * Format         : YUV444
@@ -99,7 +125,9 @@ Image decoded: img_irotN_imirN.avif
  * ICC Profile    : Absent (0 bytes)
  * XMP Metadata   : Absent (0 bytes)
  * EXIF Metadata  : Absent (0 bytes)
- * Transformations: None
+ * Transformations:
+    * irot (Rotation)      : 0
+    * imir (Mirror)        : 1 (Horizontal axis, "top-to-bottom")
  * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
  * Frames:
    * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
@@ -122,6 +150,44 @@ Image decoded: img_irot0_imirN.avif
  * Frames:
    * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
 
+Image decoded: img_irot1_imir0.avif
+ * Resolution     : 245x334
+ * Bit Depth      : 8
+ * Format         : YUV444
+ * Alpha          : Absent
+ * Range          : Full
+ * Color Primaries: 1
+ * Transfer Char. : 13
+ * Matrix Coeffs. : 6
+ * ICC Profile    : Absent (0 bytes)
+ * XMP Metadata   : Absent (0 bytes)
+ * EXIF Metadata  : Absent (0 bytes)
+ * Transformations:
+    * irot (Rotation)      : 1
+    * imir (Mirror)        : 0 (Vertical axis, "left-to-right")
+ * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
+ * Frames:
+   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
+
+Image decoded: img_irot1_imir1.avif
+ * Resolution     : 245x334
+ * Bit Depth      : 8
+ * Format         : YUV444
+ * Alpha          : Absent
+ * Range          : Full
+ * Color Primaries: 1
+ * Transfer Char. : 13
+ * Matrix Coeffs. : 6
+ * ICC Profile    : Absent (0 bytes)
+ * XMP Metadata   : Absent (0 bytes)
+ * EXIF Metadata  : Absent (0 bytes)
+ * Transformations:
+    * irot (Rotation)      : 1
+    * imir (Mirror)        : 1 (Horizontal axis, "top-to-bottom")
+ * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
+ * Frames:
+   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
+
 Image decoded: img_irot1_imirN.avif
  * Resolution     : 245x334
  * Bit Depth      : 8
@@ -136,6 +202,44 @@ Image decoded: img_irot1_imirN.avif
  * EXIF Metadata  : Absent (0 bytes)
  * Transformations:
     * irot (Rotation)      : 1
+ * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
+ * Frames:
+   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
+
+Image decoded: img_irot2_imir0.avif
+ * Resolution     : 245x334
+ * Bit Depth      : 8
+ * Format         : YUV444
+ * Alpha          : Absent
+ * Range          : Full
+ * Color Primaries: 1
+ * Transfer Char. : 13
+ * Matrix Coeffs. : 6
+ * ICC Profile    : Absent (0 bytes)
+ * XMP Metadata   : Absent (0 bytes)
+ * EXIF Metadata  : Absent (0 bytes)
+ * Transformations:
+    * irot (Rotation)      : 2
+    * imir (Mirror)        : 0 (Vertical axis, "left-to-right")
+ * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
+ * Frames:
+   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
+
+Image decoded: img_irot2_imir1.avif
+ * Resolution     : 245x334
+ * Bit Depth      : 8
+ * Format         : YUV444
+ * Alpha          : Absent
+ * Range          : Full
+ * Color Primaries: 1
+ * Transfer Char. : 13
+ * Matrix Coeffs. : 6
+ * ICC Profile    : Absent (0 bytes)
+ * XMP Metadata   : Absent (0 bytes)
+ * EXIF Metadata  : Absent (0 bytes)
+ * Transformations:
+    * irot (Rotation)      : 2
+    * imir (Mirror)        : 1 (Horizontal axis, "top-to-bottom")
  * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
  * Frames:
    * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
@@ -158,6 +262,44 @@ Image decoded: img_irot2_imirN.avif
  * Frames:
    * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
 
+Image decoded: img_irot3_imir0.avif
+ * Resolution     : 245x334
+ * Bit Depth      : 8
+ * Format         : YUV444
+ * Alpha          : Absent
+ * Range          : Full
+ * Color Primaries: 1
+ * Transfer Char. : 13
+ * Matrix Coeffs. : 6
+ * ICC Profile    : Absent (0 bytes)
+ * XMP Metadata   : Absent (0 bytes)
+ * EXIF Metadata  : Absent (0 bytes)
+ * Transformations:
+    * irot (Rotation)      : 3
+    * imir (Mirror)        : 0 (Vertical axis, "left-to-right")
+ * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
+ * Frames:
+   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
+
+Image decoded: img_irot3_imir1.avif
+ * Resolution     : 245x334
+ * Bit Depth      : 8
+ * Format         : YUV444
+ * Alpha          : Absent
+ * Range          : Full
+ * Color Primaries: 1
+ * Transfer Char. : 13
+ * Matrix Coeffs. : 6
+ * ICC Profile    : Absent (0 bytes)
+ * XMP Metadata   : Absent (0 bytes)
+ * EXIF Metadata  : Absent (0 bytes)
+ * Transformations:
+    * irot (Rotation)      : 3
+    * imir (Mirror)        : 1 (Horizontal axis, "top-to-bottom")
+ * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
+ * Frames:
+   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
+
 Image decoded: img_irot3_imirN.avif
  * Resolution     : 245x334
  * Bit Depth      : 8
@@ -172,23 +314,6 @@ Image decoded: img_irot3_imirN.avif
  * EXIF Metadata  : Absent (0 bytes)
  * Transformations:
     * irot (Rotation)      : 3
- * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
- * Frames:
-   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
-
-Image decoded: img_irotN_imirN.avif
- * Resolution     : 245x334
- * Bit Depth      : 8
- * Format         : YUV444
- * Alpha          : Absent
- * Range          : Full
- * Color Primaries: 1
- * Transfer Char. : 13
- * Matrix Coeffs. : 6
- * ICC Profile    : Absent (0 bytes)
- * XMP Metadata   : Absent (0 bytes)
- * EXIF Metadata  : Absent (0 bytes)
- * Transformations: None
  * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
  * Frames:
    * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
@@ -225,6 +350,23 @@ Image decoded: img_irotN_imir1.avif
  * EXIF Metadata  : Absent (0 bytes)
  * Transformations:
     * imir (Mirror)        : 1 (Horizontal axis, "top-to-bottom")
+ * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
+ * Frames:
+   * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
+
+Image decoded: img_irotN_imirN.avif
+ * Resolution     : 245x334
+ * Bit Depth      : 8
+ * Format         : YUV444
+ * Alpha          : Absent
+ * Range          : Full
+ * Color Primaries: 1
+ * Transfer Char. : 13
+ * Matrix Coeffs. : 6
+ * ICC Profile    : Absent (0 bytes)
+ * XMP Metadata   : Absent (0 bytes)
+ * EXIF Metadata  : Absent (0 bytes)
+ * Transformations: None
  * 1 timescales per second, 1.00 seconds (1 timescales), 1 frame
  * Frames:
    * Decoded frame [0] [pts 0.00 (0 timescales)] [duration 1.00 (1 timescales)]
