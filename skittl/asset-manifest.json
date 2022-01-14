@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/skittl/static/css/main.f09d0193.css",
+    "main.js": "/skittl/static/js/main.e0299142.js",
+    "index.html": "/skittl/index.html",
+    "main.f09d0193.css.map": "/skittl/static/css/main.f09d0193.css.map",
+    "main.e0299142.js.map": "/skittl/static/js/main.e0299142.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f09d0193.css",
+    "static/js/main.e0299142.js"
+  ]
+}
