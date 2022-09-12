@@ -1,0 +1,15 @@
+{
+  "name": "Solitaire",
+  "short_name": "Solitaire",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "theme_color": "#ffffff",
+  "background_color":"#ffffff",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }]
+}
