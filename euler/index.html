@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Project Euler: Joe Drago</title>
+  <script src="ext/jquery-1.7.1.min.js"></script>
+  <script src="ext/jquery.mousewheel-min.js"></script>
+  <script src="ext/jquery.terminal-min.js"></script>
+  <link href="ext/jquery.terminal.css" rel="stylesheet"/>
+<!--[if IE]>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+.tilda {
+    position: absolute;
+}
+</style>
+<script>
+jQuery(document).ready(function($) {
+   $(window).scroll(function() {
+      $('.tilda').each(function() {
+         $(this).css({top: $('body').prop('scrollTop')});
+      });
+   });
+});
+</script>
+<![endif]-->
+<style>
+html {
+  height: 100%;
+}
+body {
+  background-color: black;
+  height: 100%;
+}
+.terminal, .cmd {
+    font-size: 14px;
+}
+#term {
+  height: 95%;
+}
+</style>
+</head>
+<body>
+  <div id="term"></div>
+  <script type="text/javascript" src="ext/coffee-script.js"></script>
+  <script type="text/javascript" src="js/euler.js"></script>
+  <script type="text/javascript">
+  function createTerminal() {
+    window.terminal = $('#term').terminal(function(command, terminal) { window.onCommand(command); }, {
+      prompt: 'euler> ',
+      name: 'test',
+      greetings: "Project Euler: Joe Drago\n",
+      exit: false,
+      completion: ['help', 'run', 'test', 'answer', 'describe', 'list']
+    });
+  }
+  </script>
+  <script type="text/coffeescript">
+    # from http://css-tricks.com/snippets/javascript/get-url-variables/
+    getQueryVariable = (variable, def) ->
+      query = window.location.search.substring(1)
+      vars = query.split("&")
+      for pairText in vars
+        pair = pairText.split("=")
+        if pair[0] == variable
+          return unescape(pair[1])
+      return def
+
+    startup = ->
+      createTerminal()
+
+      firstCommand = getQueryVariable("c", "help").replace(/_/gm, " ")
+      window.onCommand(firstCommand)
+
+    require("terminal")
+    startup()
+  </script>
+</body>
+</html>
