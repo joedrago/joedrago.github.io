@@ -1,0 +1,127 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+<link rel="manifest" href="manifest.webmanifest"/>
+<title>Blackout Scoreboard</title>
+<style>
+    html, body {
+        color: #fff;
+        background-color: #030;
+        user-select: none;
+        font-weight: 900;
+    }
+
+    .toppad {
+        height: 10vh;
+    }
+
+    .col {
+        display: inline-block;
+        width: 18vw;
+    }
+
+    .scorecol {
+        border-right: 1px solid #666;
+    }
+
+    .notready {
+        opacity: 0.3;
+    }
+
+    .player {
+        font-size: 8vh;
+    }
+    .score {
+        font-size: 7vh;
+        padding-bottom: 5vh;
+        color: #ffa;
+    }
+
+    .bhead {
+        font-size: 5vh;
+        text-align: right;
+    }
+    .brow {
+        font-size: 5vh;
+        text-align: right;
+        font-weight: 900;
+    }
+    .bplay {
+    }
+    .bdelta {
+        padding-left: 4vh;
+    }
+    .bscore {
+        padding-left: 4vh;
+        color: #ffa;
+    }
+
+    .deltaNonzero {
+        color: #faa;
+    }
+
+    .bid {
+        font-size: 30vh;
+    }
+
+    .tricks {
+        font-size: 20vh;
+    }
+
+    .bidb {
+        font-size: 10vh;
+    }
+
+    .tricksRight {
+    }
+    .tricksWrong {
+        color: #faa;
+    }
+
+    .tl {
+        position: fixed;
+        font-size: 5vh;
+        padding: 2vh;
+        left: 0px;
+        top: 0px;
+    }
+
+    .tr {
+        position: fixed;
+        font-size: 5vh;
+        padding: 2vh;
+        right: 0px;
+        top: 0px;
+    }
+
+    .bl {
+        position: fixed;
+        font-size: 5vh;
+        padding: 2vh;
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .br {
+        position: fixed;
+        font-size: 5vh;
+        padding: 2vh;
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .button {
+        font-size: 4vh;
+        font-weight: 300;
+        font-style: italic;
+        display: inline-block;
+        padding: 5px;
+    }
+</style>
+</head>
+<body>
+<div id="main"></div>
+<script src="ext/nosleep.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
