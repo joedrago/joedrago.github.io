@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Replicube</title>
+    <style>
+      body {
+        font-family: monospace;
+        color: #fff;
+        margin: 0;
+        background-color: #365987;
+      }
+      #view {
+        position: fixed;
+        right: 0px;
+        width: 50%;
+        height: 100%;
+      }
+      #left {
+        position: fixed;
+        left: 0px;
+        width: 50%;
+        height: 100%;
+      }
+      #repform {
+        width: 100%;
+      }
+      #sliders {
+        user-select: none;
+      }
+      #lua {
+        width: 90%;
+        color: #fff;
+      }
+      #error {
+        user-select: none;
+        color: #faa;
+      }
+      #editor {
+        border: 1px solid black;
+        position: fixed;
+        bottom: 0px;
+        width: 50%;
+        height: 90%;
+    }
+    </style>
+    <script src="/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script type="module" crossorigin src="/assets/index-C8J2uxYC.js"></script>
+  </head>
+  <body>
+    <div id="left">
+      <center>
+      <form id="repform">
+        <div id="sliders">
+          <input type="range" id="s" name="s" min="1" max="11" value="3" onchange="window.cubeSizeChanged()" />
+          <label id="cubesizelabel" for="s">3</label>
+        </div>
+      </form>
+      <div id="error"></div>
+    </center>
+
+    <div id="editor"></div>
+
+    </div>
+    <div id="view"></div>
+  </body>
+</html>
